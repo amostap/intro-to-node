@@ -16,5 +16,5 @@ Introduction to node from Pluralsight
 
 # API (with `token` in head)
  - GET: `http://localhost:{port}/api/practices` -> [practices]
- - GET: `http://localhost:{port}/api/technologies/:practicesID` -> [technsologies]
- - GET: `http://localhost:{port}/api/technologies/2?page=1&per=5` -> [technsologies with pagination(page, per - optional, default value: `page: 1`, `per: 5`)]
+ - GET: `http://localhost:{port}/api/technologies/:practicesId` -> [technsologies]
+ - GET: `http://localhost:{port}/api/technologies/:practicesId?page=1&per=5` -> [technsologies with pagination(page, per - optional, default value: `page: 1`, `per: 5`)]
