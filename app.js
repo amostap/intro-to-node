@@ -1,24 +1,30 @@
-/* eslint-disable no-console */
 const express = require('express');
+const logger = require('morgan');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+
+const apiRouter = require('./routes/apiRoutes')();
 
 const app = express();
-const port = process.env.PORT || 5000;
 
-const apiRouter = require('./src/routes/apiRoutes')();
-
-app.use(express.static('public'));
+app.use(cors());
+app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api', apiRouter);
 
-app.get('/*', (req, res) => {
-  res.sendStatus(404);
+app.use((req, res, next) => {
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
-app.listen(port, (err) => {
-  if (err) throw err;
+app.use((err, req, res) => {
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  console.log(`Running server on port: ${port}`);
+  res.sendStatus(err.status || 500);
 });
+
+module.exports = app;
