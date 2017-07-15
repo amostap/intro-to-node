@@ -1,22 +1,38 @@
 {
-  "name": "library",
-  "version": "1.0.0",
+  "name": "intro-to-node",
+  "version": "1.1.0",
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "gulp serve",
+    "start": "cross-env NODE_ENV=production node ./bin/www",
+    "dev": "cross-env NODE_ENV=development nodemon ./bin/www",
     "seed": "node seed.js"
   },
   "author": "amostap",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.14.1",
-    "express": "^4.13.3",
-    "mongodb": "^2.2.29"
+    "jsonwebtoken": "^7.2.1",
+    "async": "^2.5.0",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "cross-env": "^5.0.1",
+    "debug": "^2.6.7",
+    "express": "^4.15.2",
+    "mongodb": "^2.2.30",
+    "mongoose": "4.10.8",
+    "mongoose-paginate": "^5.0.3",
+    "morgan": "^1.8.2",
+    "nconf": "^0.8.4",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-nodemon": "^2.0.0"
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.7.0",
+    "nodemon": "^1.11.0"
   }
 }
