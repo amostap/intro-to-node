@@ -42,7 +42,9 @@ const apiController = () => {
     };
 
     Technology.paginate(query, options, (err, data) => {
-      if (err) return next(err);
+      if (err) {
+        return next(err);
+      }
       if (!data || data.length === 0) {
         res.sendStatus(404);
       } else {
@@ -54,11 +56,16 @@ const apiController = () => {
   const getTechnologiesById = (req, res, next) => {
     const practiceId = req.params.practiceId;
     const technologyId = req.params.technologyId;
-    const query = { practice_id: practiceId, id: technologyId };
+    const query = {
+      practice_id: practiceId,
+      id: technologyId
+    };
     const select = '-_id -__v';
 
     Technology.find(query, select, (err, data) => {
-      if (err) next(err);
+      if (err) {
+        next(err);
+      }
       if (!data || data.length === 0) {
         res.sendStatus(404);
       } else {
