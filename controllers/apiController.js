@@ -17,7 +17,7 @@ const apiController = () => {
   };
 
   const getPracticesById = (req, res, next) => {
-    const id = req.params.practiceId;
+    const id = req.params.practice_id;
     const query = { id };
     const select = '-_id -__v';
     Practice.find(query, select, (err, results) => {
@@ -30,10 +30,10 @@ const apiController = () => {
   };
 
   const getTechnologies = (req, res, next) => {
-    const practiceId = req.params.practiceId;
+    const practice_id = req.params.practice_id;
     const per = +req.query.per || DEFAULT_PER;
     const page = +req.query.page || DEFAULT_PAGE;
-    const query = { practice_id: practiceId };
+    const query = { practice_id };
     const select = '-_id -__v';
     const options = {
       select,
@@ -54,11 +54,11 @@ const apiController = () => {
   };
 
   const getTechnologiesById = (req, res, next) => {
-    const practiceId = req.params.practiceId;
-    const technologyId = req.params.technologyId;
+    const practice_id = req.params.practice_id;
+    const id = req.params.technology_id;
     const query = {
-      practice_id: practiceId,
-      id: technologyId
+      practice_id,
+      id: id
     };
     const select = '-_id -__v';
 
