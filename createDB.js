@@ -1,5 +1,6 @@
 const async = require('async');
 const mongoose = require('./lib/mongoose');
+const bcrypt = require('bcrypt');
 
 mongoose.set('debug', true);
 
@@ -56,13 +57,12 @@ const createTechnologies = (callback) => {
 
 const createUsers = (callback) => {
   const users = [
-    { username: '1', password: 'password1' },
-    { username: '2', password: 'password2' },
-    { username: '3', password: 'password3' },
+    { email: 'admin@mail.com', password: '12345678' }
   ];
 
-  async.each(users, (userData, next) => {
-    const user = new mongoose.models.User(userData);
+  async.each(users, (data, next) => {
+    const user = new mongoose.models.User(data);
+    user.hashPassword = bcrypt.hashSync(data.password, 10);
     user.save(next);
   }, callback);
 };
@@ -73,7 +73,7 @@ async.series([
   requireModels,
   createPractices,
   createTechnologies,
-  createUsers,
+  createUsers
 ], (err) => {
   mongoose.disconnect();
   process.exit(err ? 255 : 0);
