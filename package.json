@@ -10,7 +10,8 @@
     "prestart": "npm run seed",
     "start": "cross-env NODE_ENV=production node ./bin/www",
     "dev": "cross-env NODE_ENV=development nodemon ./bin/www",
-    "seed": "node createDB.js"
+    "seed": "node createDB.js",
+    "test": "mocha ./test"
   },
   "author": "amostap",
   "license": "MIT",
@@ -24,16 +25,22 @@
     "express": "^4.15.2",
     "glob": "^7.1.2",
     "jsonwebtoken": "^7.4.1",
+    "moment": "^2.18.1",
     "mongoose": "4.10.8",
     "mongoose-paginate": "^5.0.3",
     "morgan": "^1.8.2",
     "nconf": "^0.8.4"
   },
   "devDependencies": {
+    "chai": "^4.1.0",
     "eslint": "^3.19.0",
     "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-node": "^5.1.0",
-    "nodemon": "^1.11.0"
+    "eslint-plugin-mocha": "^4.11.0",
+    "eslint-plugin-node": "^5.1.1",
+    "mocha": "^3.4.2",
+    "nodemon": "^1.11.0",
+    "should": "^11.2.1",
+    "sinon": "^2.3.8"
   },
   "false": {}
 }

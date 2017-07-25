@@ -58,7 +58,7 @@ const apiController = () => {
     const id = req.params.technology_id;
     const query = {
       practice_id,
-      id: id
+      id
     };
     const select = '-_id -__v';
 
