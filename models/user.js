@@ -1,5 +1,5 @@
-const mongoose = require('../lib/mongoose');
 const bcrypt = require('bcrypt');
+const mongoose = require('../lib/mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
@@ -13,11 +13,7 @@ const userSchema = new Schema({
   hashPassword: {
     type: String,
     required: true,
-  },
-  created: {
-    type: Date,
-    default: Date.now,
-  },
+  }
 });
 
 userSchema.methods.comparePassword = function(password) {

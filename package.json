@@ -7,12 +7,14 @@
     "node": ">=6.11.1"
   },
   "scripts": {
-    "prestart": "npm run seed",
+    "prestart": "npm run start-mongo && npm run seed",
     "start": "cross-env NODE_ENV=production node ./bin/www",
     "dev": "cross-env NODE_ENV=development nodemon ./bin/www",
     "pretest": "npm run seed",
     "test": "cross-env NODE_ENV=test mocha",
-    "seed": "node createDB.js"
+    "seed": "node createDB.js",
+    "start-mongo": "start mongod",
+    "stop-mongo": "start mongo admin --eval \"db.getSiblingDB('admin').shutdownServer()\""
   },
   "author": "amostap",
   "license": "MIT",

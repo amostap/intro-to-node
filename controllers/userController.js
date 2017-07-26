@@ -1,54 +1,53 @@
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+
 const User = require('../models/user').User;
 const mongoose = require('../lib/mongoose');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const config = require('../config');
 
 const userController = () => {
   const register = (req, res) => {
-    User.findOne({ email: req.body.email }, (err, user) => {
-      if (user) {
-        return res.status(409).send({ message: 'User already exist' });
-      } else {
-        const newUser = new mongoose.models.User(req.body);
-          newUser.hashPassword = bcrypt.hashSync(req.body.password, 10);
-          newUser.save((err, user) => {
-            if (err) {
-              return res.status(400).send({ message: err });
-          } else {
-            const data = {
-              email: user.email
-            };
-            return res.json(data);
-          }
-        });
-      }
-    });
+    if (!req.body.password || !req.body.email) {
+      res.status(400).send({ message: 'Bad request' });
+    } else {
+      User.findOne({ email: req.body.email }, (err, user) => {
+        if (user) {
+          return res.status(409).send({ message: 'User already exist' });
+        } else {
+          const newUser = new mongoose.models.User(req.body);
+            newUser.hashPassword = bcrypt.hashSync(req.body.password, 10);
+            newUser.save((err, user) => {
+              if (err) {
+                return res.status(400).send({ message: err });
+            } else {
+              const data = {
+                email: user.email
+              };
+              return res.json(data);
+            }
+          });
+        }
+      });
+    }
   };
 
-  const sigIn = (req, res) => {
+  const signIn = (req, res) => {
     User.findOne({
       email: req.body.email
     }, (err, user) => {
       if (err) {
-        throw err;
+        res.status(500).json('oh');
       }
       if (!user) {
         res.status(401).json({ message: 'Authentication failed. User not found.' });
       } else if (user) {
-        if (!user.comparePassword(req.body.password)) {
+        if (!req.body.password) {
+          res.status(401).json({ message: 'Authentication failed. Wrong password.' });
+        } else if (!user.comparePassword(req.body.password)) {
           res.status(401).json({ message: 'Authentication failed. Wrong password.' });
         } else {
           return res.json({
-            token: jwt.sign(
-              {
-                _id: user._id
-              },
-              config.get('secret'),
-              {
-                expiresIn: 60 * 5
-              }
-            )
+            token: jwt.sign({ _id: user._id }, config.get('secret'), { expiresIn: 60 * 5 })
           });
         }
       }
@@ -71,7 +70,7 @@ const userController = () => {
 
   return {
     register,
-    sigIn,
+    signIn,
     loginRequired
   };
 };
