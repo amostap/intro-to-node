@@ -40,12 +40,16 @@ const userController = () => {
           res.status(401).json({ message: 'Authentication failed. Wrong password.' });
         } else {
           return res.json({
-            token: jwt.sign({
-              _id: user._id
-            },
-            config.get('secret'),
-            { expiresIn: 60 * 5 })} // 5min(60s * 5)
-          );
+            token: jwt.sign(
+              {
+                _id: user._id
+              },
+              config.get('secret'),
+              {
+                expiresIn: 60 * 5
+              }
+            )
+          });
         }
       }
     });

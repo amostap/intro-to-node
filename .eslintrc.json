@@ -14,6 +14,7 @@
     "mocha": true
   },
   "rules": {
+    "node/no-unpublished-require": 0,
     "mocha/no-exclusive-tests": "error",
     "no-console": 1,
     "no-process-exit": 1,
