@@ -1,18 +1,21 @@
 {
   "root": true,
   "extends": ["eslint:recommended", "plugin:node/recommended"],
-  "plugins": ["node"],
+  "plugins": ["node", "mocha"],
   "parserOptions": {
-    "ecmaVersion": 7,
+    "ecmaVersion": 5,
     "sourceType": "module"
   },
   "env": {
     "es6": true,
     "browser": true,
     "node": true,
-    "mongo": true
+    "mongo": true,
+    "mocha": true
   },
   "rules": {
+    "node/no-unpublished-require": 0,
+    "mocha/no-exclusive-tests": "error",
     "no-console": 1,
     "no-process-exit": 1,
     "array-bracket-spacing": [2, "never"],

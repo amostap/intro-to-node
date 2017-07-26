@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 const userController = require('../controllers/userController')();
 
@@ -8,7 +10,7 @@ const router = () => {
     .post(userController.register);
 
   authRouter.route('/sign_in')
-    .post(userController.sigIn);
+    .post(userController.signIn);
 
   return authRouter;
 };
