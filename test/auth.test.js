@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken');
 
 const app = require('../app.js');
 const config = require('../config');
-const User = require('../models/user').User;
 
 const should = chai.should();
 const expect = chai.expect;
@@ -88,7 +87,9 @@ describe('AUTH', () => {
             done();
           });
       });
+
     });
+
   });
 
   describe('SING_IN', () => {
@@ -138,7 +139,7 @@ describe('AUTH', () => {
     });
 
     describe('POST auth/sign_in user with wrong email', () => {
-      it('it should return 401', done => {
+      it('it should return 401 and right message', done => {
         const user = {
           email: 'wrong@mail.com',
           password: 'password'
@@ -157,7 +158,7 @@ describe('AUTH', () => {
     });
 
     describe('POST auth/sign_in user with no email', () => {
-      it('it should return 401', done => {
+      it('it should return 401 and right message', done => {
         const user = {
           password: 'password'
         };
@@ -175,7 +176,7 @@ describe('AUTH', () => {
     });
 
     describe('POST auth/sign_in user with wrong password', () => {
-      it('it should return 409', done => {
+      it('it should return 409 and right message', done => {
         const user = {
           email: 'admin@mail.com',
           password: 'wrong'
@@ -194,7 +195,7 @@ describe('AUTH', () => {
     });
 
     describe('POST auth/sign_in user with no password', () => {
-      it('it should return 409', done => {
+      it('it should return 409 and right message', done => {
         const user = {
           email: 'admin@mail.com'
         };

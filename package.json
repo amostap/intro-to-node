@@ -7,11 +7,11 @@
     "node": ">=6.11.1"
   },
   "scripts": {
-    "prestart": "npm run start-mongo && npm run seed",
+    "prestart": "npm run start-mongo",
     "start": "cross-env NODE_ENV=production node ./bin/www",
     "dev": "cross-env NODE_ENV=development nodemon ./bin/www",
-    "pretest": "npm run seed",
-    "test": "cross-env NODE_ENV=test mocha",
+    "pretest": "cross-env NODE_ENV=test npm run seed",
+    "test": "cross-env NODE_ENV=test mocha --timeout 5000",
     "seed": "node createDB.js",
     "start-mongo": "start mongod",
     "stop-mongo": "start mongo admin --eval \"db.getSiblingDB('admin').shutdownServer()\""
