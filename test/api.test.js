@@ -106,52 +106,87 @@ describe('API with token', () => {
   });
 
   describe('GET api/practices', () => {
-    it('it should return 200 and res should be an array', done => {
+    it('it should return 200 and res should be an array(4)', done => {
       chai.request(app)
         .get('/api/practices')
         .set(getAuthorizationHeaders())
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
+          res.body.length.should.be.eql(4);
+          res.body[0].should.have.property('id');
+          res.body[0].should.have.property('name');
+          res.body[0].should.have.property('description');
           done();
         });
     });
   });
 
   describe('GET api/practices/:practice_id', () => {
-    it('it should return 200 and res should be an array', done => {
+    it('it should return 200 and res should be an array(1)', done => {
       chai.request(app)
-        .get('/api/practices/1')
+        .get('/api/practices/2')
         .set(getAuthorizationHeaders())
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
+          res.body.length.should.be.eql(1);
+          res.body[0].should.have.property('id');
+          res.body[0].should.have.property('name');
+          res.body[0].should.have.property('description');
           done();
         });
     });
   });
 
   describe('GET api/practices/:practice_id/technologies', () => {
-    it('it should return 200 and res should be an array', done => {
+    it('it should return 200 and res should be an array(4)', done => {
       chai.request(app)
-        .get('/api/practices/1/technologies')
+        .get('/api/practices/2/technologies')
         .set(getAuthorizationHeaders())
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
+          res.body.length.should.be.eql(4);
+          res.body[0].should.have.property('id');
+          res.body[0].should.have.property('name');
+          res.body[0].should.have.property('description');
+          done();
+        });
+    });
+  });
+
+  describe('GET api/practices/:practice_id/technologies?page=1&per=2', () => {
+    it('it should return 200 and res should be an array(2)', done => {
+      chai.request(app)
+        .get('/api/practices/2/technologies?page=1&per=2')
+        .set(getAuthorizationHeaders())
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('array');
+          res.body.length.should.be.eql(2);
+          res.body[0].should.have.property('id');
+          res.body[0].should.have.property('name');
+          res.body[0].should.have.property('description');
+          res.body[0].should.have.property('practice_id');
           done();
         });
     });
   });
 
   describe('GET api/practices/:practice_id/technologies/:technology_id', () => {
-    it('it should return 200 and res should be an array', done => {
+    it('it should return 200 and res should be an array(1)', done => {
       chai.request(app)
         .get('/api/practices/1/technologies/1')
         .set(getAuthorizationHeaders())
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
+          res.body.length.should.be.eql(1);
+          res.body[0].should.have.property('id');
+          res.body[0].should.have.property('name');
+          res.body[0].should.have.property('description');
+          res.body[0].should.have.property('practice_id');
           done();
         });
     });
