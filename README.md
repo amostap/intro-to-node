@@ -2,14 +2,14 @@
 Introduction to node from Pluralsight
 
 - clone project;
-- run mongod;
 
 # Commands
 - `npm i`
-- `npm start` (for create db, seed, start server at default port: 3000)
+- `npm start` (for start mongod, create db, seed, start server at default port: 3000)
 - Optional: 
 - `npm seed` (make db and seed mock data, port: `27017` (mongo default, or can be changed in `src/config.js`))
 - `npm run dev` (for development, default port: 3000)
+- `npm test`
 
 # AUTH_API (open)
 - POST: `http://localhost:{port}/auth/register` -> req: { email: 'email', password: 'password' } -> res: email and status_code: 200 
